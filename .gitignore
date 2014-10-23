@@ -15,4 +15,5 @@
 /log/*.log
 /tmp
 
-/my_app_test
+*my_app_test
+*my_app_development

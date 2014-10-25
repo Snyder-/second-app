@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
                     length: { maximum: 255 },
                     format: { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }
-  validates :password, length: { minimum: 6, maximum: 15 }    
+  validates :password, length: { minimum: 6 }, allow_blank: true    
                     
   def User.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :

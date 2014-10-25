@@ -10,5 +10,10 @@ class User < ActiveRecord::Base
                     uniqueness: { case_sensitive: false }
   validates :password, length: { minimum: 6, maximum: 15 }    
                     
+  def User.digest(string)
+     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
+                                                   BCrypt::Engine.cost
+     BCrypt::Password.create(string, cost: cost)
+  end                  
                     
 end

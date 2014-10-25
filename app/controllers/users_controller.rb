@@ -20,6 +20,7 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+    @user = User.find(params[:id])
   end
 
   # POST /users
@@ -38,7 +39,14 @@ class UsersController < ApplicationController
   # PUT /users/1
   # PUT /users/1.xml
   def update
-   
+    @user = User.find(params[:id])
+    if @user.update_attributes(user_params)
+      flash[:success] = "Saved Changes."
+      redirect_to @user
+    else
+      flash.now[:danger] = "Invalid changes, please try again."
+      render 'edit'
+    end
   end
 
   # DELETE /users/1

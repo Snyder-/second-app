@@ -56,17 +56,14 @@ class UserTest < ActiveSupport::TestCase
     assert_not @user.valid?
   end
   
-  test "password should have maximum length" do
-    @user.password = @user.password_confirmation = "a" * 16
-    assert_not @user.valid?
-  end
-  
   test "email gets downcased" do
     @user.email = "USER@EXAMPLE.COM"
     assert_equal "USER@EXAMPLE.COM", @user.email
     @user.save
     assert_equal "user@example.com", @user.reload.email
   end
-  
+  test "authenticated? should return false for a user with nil digest" do
+      assert_not @user.authenticated?('')
+    end
 
 end
